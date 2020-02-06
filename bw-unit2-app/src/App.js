@@ -6,6 +6,9 @@ import { Switch, Route } from 'react-router-dom';
 //components
 import RegisterForm  from './components/RegisterForm';
 import NavBar from './components/NavBar';
+import ProfileCard from './components/ProfileCard';
+import ProileList from './components/ProfileList';
+import ProfileList from './components/ProfileList';
 
 
 
@@ -23,7 +26,9 @@ function App() {
       
       <div>
         <Route path ='/register' component = {RegisterForm} />
-        <RegisterForm />
+        <Route path = '/profile' component = {ProfileList} />
+
+        {/* <RegisterForm /> */}
       </div>
 
     </div>
