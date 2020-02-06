@@ -1,2 +1,2 @@
-# Web-React-II
-Repo for Web React II 
+# Web-React-I
+Repo for Unit 2 ~ Web React I
