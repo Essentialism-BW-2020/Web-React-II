@@ -53,12 +53,12 @@ border-radius: 2em;
 
 `
 //app
-function AccountDashboard() {
+function RegisterSuccess() {
 return( 
 <AppContainer>
     <HeaderStyle>
       <h1>
-        Essentialism App (Placeholder Dashboard/welcome page etc)
+        Essentialism App (Placeholder Registration success page)
         </h1>
         <div>
           {/* <Route exact path="/" component={Home} /> */}
@@ -67,7 +67,7 @@ return(
 
         </div>
       <Para>
-      If you're here it means you have logged in.
+      If you are here you have registered successfully!
       </Para>
     </HeaderStyle>      
 
@@ -75,4 +75,4 @@ return(
 )   
 }
 
-export default AccountDashboard;
+export default RegisterSuccess;

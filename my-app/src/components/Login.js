@@ -1,84 +1,119 @@
-import React from 'react';
-import { getUser } from '../actions/userActions';
-import styled from 'styled-components';
+import React, { useState } from 'react'
+import styled from 'styled-components'
+import { axiosWithAuth } from './axiosWithAuth'
 
-const Login = (props) => {
-  componentWillUpdate(); {
-    this.props.getUser(); 
+const LoginStyle = styled.div`
+// border: 2px dashed #e98074;
+border-radius: 1.5em;
+background-color: #e85a4f;
+padding: 1em;
+width: 300px;
+margin: 0 auto;
+margin-top: 2em;
+color: #eae7dc;
+@media (max-width: 500px) {
+  width:85%;
+  margin: 0 auto;
+}
+`
+
+const BtnStyle = styled.button`
+color: #8e8d8a;
+font-size: 1em;
+margin: 1em;
+padding: 0.25em 1em;
+border: 2px solid #8e8d8a;
+border-radius: 1em;
+  :active {
+    color:#e98074;
+    // background-color: #e98074;
+
+  }
+`
+
+function Login(props) {
+  // const { register, handleSubmit } = useForm()
+  const [user, setUser] = useState()
+  const handleChange = event => {
+    setUser(
+      {
+        ...user,
+        [event.target.name]: event.target.value
+      }
+    )
+
+  }
+  // const onSubmit = (data, e) => {
+  //   console.log(data)
+  //   e.target.reset();
+
+const handleSubmit = event => {
+    event.preventDefault()
+    login()
   }
 
+const login = event => {
+  event.preventDefault()
+  console.log('user', user)
+  event.target.reset();
+  axiosWithAuth()
+  .post ('https://deploy-serv-node-essentialism.herokuapp.com/auth/login',user, {withCredentials: true})
+  .then(result => {
+    console.log(result.data)
 
-  const handleSubmit = (e) => {
-     e.preventDefault();
-    dispatch({
-      type: 'USER_GET_START',
-      payload: 'user'
-    })
-  };
+    localStorage.setItem('token', result.data.token)
+    props.history.push('/dashboard')
+}
+)
 
-  const handleChange = e => {
-    setUser({ ...user, [e.target.name]: e.target.value });
-    console.log(user);
-  };
+  .catch(error => {
+    if(error.response) {
+      console.log(error.response.data)
+      console.log(error.response.status)
+      console.log(error.response.headers)
 
+    } else {
+      console.log(error.message)
+    }
+  })
+}
+
+  
+   
   return (
-    <Wrapper>
-      <h1>Welcome to Essentialism!</h1>
+    // <div className='login-form'>
+    <LoginStyle>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Username:
+          <br />
+          <input 
+            name="username" 
+            // ref={register({ required: true, })} 
+            placeholder='Username' 
+            type='text'
+            onChange={handleChange}
+            />
+        </label>
+        <br />
+        <label>
+          Password:
+          <br />
+          <input 
+            name="password" 
+            // ref={register({ required: true, })} 
+            placeholder='Password' 
+            type='password'
+            onChange={handleChange}
+            />
+            <br />
+            <BtnStyle type="submit">Login</BtnStyle>
+        </label>
       
-      <Form onSubmit={handleSubmit}>
-        <Input
-          type='text'
-          name='username'
-          value={user.username}
-          placeholder='Enter Username'
-          onChange={handleChange}
-        />
-        <Input
-          type='password'
-          name='password'
-          value={user.password}
-          placeholder='Enter Password'
-          onChange={handleChange}
-        />
-        <Button>Login</Button>
-      </Form>
-    </Wrapper>
+      </form>
+    </LoginStyle>
+
   );
-};
+  }
 
 export default Login;
-
-// Adding styling
-
-const Wrapper = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background:  	#2dc8aa;
-`;
-
-const Button = styled.button`
-  background: #ee9701;
-  border-radius: 20px;
-  padding: 10px;
-  margin: 5px;
-  font-weight: bold;
-`;
-
-const Input = styled.input`
-  padding: 10px;
-  margin: 10px;
-  border-radius: 20px;
-  border: 1px black;
-`;
-
-const Form = styled.form`
-  background: #89DCF5;
-  border-radius: 15px;
-  border: 7px ridge rgba(28,110,164,0.77);
-  padding: 40px;
-  margin: 0;
-  box-shadow: 10px 10px 8px #888888;
-`;

@@ -1,7 +1,9 @@
 import React from 'react';
-import '../App.css';
+import './App.css';
+// import LoginForm from './components/LoginForm'
 import styled from 'styled-components'
-
+import { Route } from 'react-router-dom'
+import { Login, RegisterForm, Navigation, Dashboard, RegisterSuccess } from './'
 
 //styles 
 
@@ -53,12 +55,13 @@ border-radius: 2em;
 
 `
 //app
-function AccountDashboard() {
+function Dash() {
 return( 
 <AppContainer>
+<Navigation />
     <HeaderStyle>
       <h1>
-        Essentialism App (Placeholder Dashboard/welcome page etc)
+        Essentialism App
         </h1>
         <div>
           {/* <Route exact path="/" component={Home} /> */}
@@ -67,12 +70,22 @@ return(
 
         </div>
       <Para>
-      If you're here it means you have logged in.
+      Enter Essentialism. The Way of the Essentialist involves doing less, 
+      but better, so you can make the highest possible contribution. 
+      It’s not about getting more done in less time or getting less done. 
+      It’s about getting only the right things done.
       </Para>
     </HeaderStyle>      
-
+  <div>
+  {/* <Route  path="/login" component={LoginForm} /> */}
+  <Route  path="/register" component={RegisterForm} />
+  <Route  exact path="/" component={Login} />
+  <Route path='/dashboard' component={Dashboard} />
+  <Route path='/success' component={RegisterSuccess} />
+    {/* <LoginForm /> */}
+  </div>
 </AppContainer>
 )   
 }
 
-export default AccountDashboard;
+export default Dash;

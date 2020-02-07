@@ -12,6 +12,7 @@ import Values from './components/Values';
 import Login from './components/Login';
 import RegisterForm from './components/RegisterForm';
 import userReducer from './reducers/userReducer';
+import Dash from './components/Dash'
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
         <Route to='/values' component={Values} />
         <Route to='/projects' component={Projects} />
       </Router>
+      <Dash />
     </div>
   );
 }

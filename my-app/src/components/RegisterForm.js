@@ -1,62 +1,126 @@
-import React, { useState, useReducer } from 'react';
-import '../App.css';
-import userReducer from '../reducers/userReducer';
-// registration form 
-// basic information to register for the app
-
-export default function RegisterForm () {
-    const [info, setInfo] = useState('');
-    const [state, dispatch] = useReducer(userReducer);
+import React, { useState } from 'react'
+// import { useForm } from 'react-hook-form'
+import styled from 'styled-components'
+import { axiosWithAuth } from './axiosWithAuth'
 
 
-    const handleChange = e => {
-        e.preventDefault();
-        dispatch({...state, [e.target.name]: e.target.value});
-    }
+// https://essentialism-node-express-serv.herokuapp.com/auth/login
 
-    const handleSubmit = e => {
-        e.preventDefault();
-        // console.log(info.name);
-        // console.log(info.email);
-        dispatch({
-            type: 'USER_POST_START',
-            payload: 'info'
-        });
-        setInfo('');
-    }
 
-    return (
-        <div className='form'>
-            <form onSubmit={event => handleSubmit(event)}>
+const LoginStyle = styled.div`
+// border: 2px dashed #e98074;
+border-radius: 1.5em;
+background-color: #e85a4f;
+padding: 1em;
+width: 300px;
+margin: 0 auto;
+margin-top: 2em;
+color: #eae7dc;
+@media (max-width: 500px) {
+  width:85%;
+  margin: 0 auto;
+}
+`
 
-                <label>
-                    Name:
-                    <input 
-                        type='text'
-                        name='name'
-                        value={info.name}
-                        onChange={event => handleChange(event)}
-                    />
-                </label>
+const BtnStyle = styled.button`
+color: #8e8d8a;
+font-size: 1em;
+margin: 1em;
+padding: 0.25em 1em;
+border: 2px solid #8e8d8a;
+border-radius: 1em;
+  :active {
+    color:#e98074;
+    // background-color: #e98074;
 
-                <br/>
+  }
+`
 
-                <label>
-                    Email:
-                    <input 
-                        type='email'
-                        name='email'
-                        value={info.email}
-                        onChange={event => handleChange(event)}
-                    />
-                </label>
-
-                <br/>
-
-                <button>Simplify My Life</button>
-
-            </form>
-        </div>
+function RegisterForm(props) {
+  // const { register, handleSubmit } = useForm()
+  const [user, setUser] = useState({username: '', password: ''})
+  const handleChange = event => {
+    setUser(
+      {
+        ...user,
+        [event.target.name]: event.target.value
+      }
     )
+
+  }
+  // const onSubmit = (data, e) => {
+  //   console.log(data)
+  //   e.target.reset();
+
+const handleSubmit = event => {
+  event.preventDefault()
+  login()
 }
 
+const login = event => {
+  event.preventDefault()
+  event.target.reset();
+  axiosWithAuth()
+  .post ('https://deploy-serv-node-essentialism.herokuapp.com/auth/register',user, {withCredentials: true})
+  .then(result => {
+    console.log(result.data)
+
+    localStorage.setItem('token', result.data.token)
+    props.history.push('/success')
+}
+)
+
+  .catch(error => {
+    if(error.response) {
+      console.log(error.response.data)
+      console.log(error.response.status)
+      console.log(error.response.headers)
+
+    } else {
+      console.log(error.message)
+    }
+  })
+}
+
+  
+   
+  return (
+    // <div className='login-form'>
+    <LoginStyle login={login}>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Email:
+          <br />
+          <input 
+            name="username" 
+            // ref={register({ required: true, })} 
+            placeholder='Email' 
+            type='email'
+            value={user.username}
+            onChange={handleChange}
+
+            />
+        </label>
+        <br />
+        <label>
+          Password:
+          <br />
+          <input 
+            name="password" 
+            // ref={register({ required: true, })} 
+            placeholder='Password' 
+            type='password'
+            value={user.password}
+            onChange={handleChange}
+            />
+            <br />
+            <BtnStyle type="submit">Register</BtnStyle>
+        </label>
+      
+      </form>
+    </LoginStyle>
+
+  );
+  }
+
+export default RegisterForm;
