@@ -33,6 +33,7 @@ export default function RegisterForm () {
     return (
         <div className='form'>
             <form onSubmit={event => handleSubmit(event)}>
+                {/* no form validation bc only 3 fields & put all of them as required */}
 
                 <label>
                     Name:
@@ -41,6 +42,7 @@ export default function RegisterForm () {
                         name='name'
                         value={info.name}
                         onChange={event => handleChange(event)}
+                        required
                     />
                 </label>
 
@@ -53,6 +55,7 @@ export default function RegisterForm () {
                         name='email'
                         value={info.email}
                         onChange={event => handleChange(event)}
+                        required
                     />
                 </label>
 
@@ -65,6 +68,7 @@ export default function RegisterForm () {
                         name='password'
                         value={info.password}
                         onChange={event => handleChange(event)}
+                        required
                     />
                 </label>
 
