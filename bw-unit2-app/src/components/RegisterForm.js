@@ -22,6 +22,8 @@ export default function RegisterForm () {
             .post('https://reqres.in/api/register', info)
             .then(res => {
                 console.log(res.data, 'it worked');
+
+                // regular api from be wasnt working 
             })
             .catch(err => {
                 console.log(err.data, 'try again');
