@@ -16,8 +16,8 @@ export default function ProfileList(props) {
       axios
         .get('https://reqres.in/api/users?page=2')
         .then( resp => {
-          console.log(resp.data);
-          setProfile(resp.data)
+          console.log(resp.data.data);
+          setProfile(resp.data.data)
         })
         .catch( err => {
           console.log('tis ded jim', err)
@@ -33,8 +33,8 @@ export default function ProfileList(props) {
       <h2>Profile</h2>
       {profile.map(profile => {
       return (
-        <ProfileCard key={profile.id} 
-            name={profile.name}
+        <ProfileCard key={profile.first_name} 
+            name={profile.first_name}
             email={profile.email}/>
       )
       })}

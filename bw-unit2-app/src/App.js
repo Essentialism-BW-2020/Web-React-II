@@ -29,6 +29,7 @@ function App() {
         <Route path = '/profile' component = {ProfileList} />
 
         {/* <RegisterForm /> */}
+        
       </div>
 
     </div>
