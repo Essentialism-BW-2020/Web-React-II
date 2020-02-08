@@ -1,6 +1,7 @@
 import React, { useState, useReducer } from 'react';
 import '../App.css';
 import userReducer from '../reducers/userReducer';
+
 // registration form 
 // basic information to register for the app
 

@@ -3,8 +3,9 @@ import { getUser } from '../actions/userActions';
 import styled from 'styled-components';
 
 const Login = (props) => {
+  console.log(props)
   componentWillUpdate(); {
-    this.props.getUser(); 
+    props.getUser(); 
   }
 
 
@@ -22,7 +23,9 @@ const Login = (props) => {
   };
 
   return (
+    
     <Wrapper>
+      {console.log(props)}
       <h1>Welcome to Essentialism!</h1>
       
       <Form onSubmit={handleSubmit}>
