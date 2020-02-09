@@ -11,13 +11,26 @@ import userReducer  from '../reducers/userReducer';
 
     render() {
                     //.map
-            const dashItems = this.props.info.map(item => (
-                <div key={item.id}>
-                    <h3>{item.user}</h3>
-                    <p>{item.values}</p>
-                    <p>{item.projects}</p>
-                </div>
-            ));
+               const dashItems = this.props.info.map(function(item, idx) {
+                        return ([                  
+                            <p key={idx}>{item.id}</p>,                     
+                            <h3 key={idx}>{item.user}</h3>,                     
+                            <p key={idx}>{item.values}</p>,                     
+                            <p key={idx}>{item.projects}</p>,
+                     
+                        ]);
+                     
+                     });
+        
+        
+
+            // const dashItems = this.props.info.map((item) => (
+            //     <div key={item.id}>
+            //         <h3>{item.user}</h3>
+            //         <p>{item.values}</p>
+            //         <p>{item.projects}</p>
+            //     </div>
+            // ));
          return ( 
              <div>
                 <h1>Dashboard</h1> 

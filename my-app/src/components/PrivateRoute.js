@@ -14,7 +14,7 @@ export default function PrivateRoute({ component: Component, ...rest}) {
      );
 };   
         
- 
+
 // =======
 // import { Route, Redirect } from 'react-router';
 
