@@ -1,0 +1,26 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  margin: 2%;
+  padding: 2%;
+  border: 2px dashed red; 
+
+  width: auto;
+  height: auto;
+}
+
+.app .header{
+  border: 2px dashed blue;
+
+  margin: 2%;
+  padding: 2%;
+}
+
+.form {
+  border: 2px dashed green;
+
+  margin: 2%;
+  padding: 2%;
+}
