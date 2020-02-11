@@ -52,10 +52,14 @@ function RegisterForm(props) {
   //   console.log(data)
   //   e.target.reset();
 
+// const handleSubmit = event => {
+//   event.preventDefault()
+//   login()
+// }
 
 const login = event => {
   event.preventDefault()
-  // event.target.reset();
+  event.target.reset();
   axiosWithAuth()
   .post ('https://deploy-serv-node-essentialism.herokuapp.com/auth/register',user, {withCredentials: true})
   .then(result => {

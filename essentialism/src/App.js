@@ -3,7 +3,7 @@ import './App.css';
 // import LoginForm from './components/LoginForm'
 import styled from 'styled-components'
 import { Route } from 'react-router-dom'
-import { LoginForm, RegisterForm, Navigation, Dashboard, RegisterSuccess } from './components'
+import { LoginForm, RegisterForm, Navigation, AccountDashboard, RegisterSuccess } from './components'
 
 //styles 
 
@@ -80,7 +80,7 @@ return(
   {/* <Route  path="/login" component={LoginForm} /> */}
   <Route  path="/register" component={RegisterForm} />
   <Route  exact path="/" component={LoginForm} />
-  <Route path='/dashboard' component={Dashboard} />
+  <Route path='/dashboard' component={AccountDashboard} />
   <Route path='/success' component={RegisterSuccess} />
     {/* <LoginForm /> */}
   </div>

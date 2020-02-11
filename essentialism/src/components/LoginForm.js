@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 // import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
 import { axiosWithAuth } from './axiosWithAuth'
+import { TextField } from 'material-ui'
 
 
 // https://essentialism-node-express-serv.herokuapp.com/auth/login
@@ -52,11 +53,15 @@ function LoginForm(props) {
   //   console.log(data)
   //   e.target.reset();
 
+// const handleSubmit = event => {
+//     event.preventDefault()
+//     login()
+//   }
 
 const login = event => {
   event.preventDefault()
   console.log('user', user)
-  // event.target.reset();
+  event.target.reset();
   axiosWithAuth()
   .post ('https://deploy-serv-node-essentialism.herokuapp.com/auth/login',user, {withCredentials: true})
   .then(result => {
